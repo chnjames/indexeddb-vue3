@@ -13,28 +13,29 @@
               <Fold v-if="!isCollapse" />
             </el-icon>
           </div>
-          <el-menu router :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
-            <el-menu-item index="/dashboard" @click="saveActiveNav('/dashboard')">
-              <el-icon>
-                <house />
-              </el-icon>
-              <span>仪表盘</span>
-            </el-menu-item>
-            <el-sub-menu index="/user-management">
-              <template #title>
-                <el-icon>
-                  <Setting />
-                </el-icon>
-                <span>系统设置</span>
-              </template>
-              <el-menu-item index="/user-info">权限管理</el-menu-item>
-            </el-sub-menu>
-            <el-menu-item index="/user-management" @click="saveActiveNav('/user-management')">
-              <el-icon>
-                <user />
-              </el-icon>
-              <span>用户管理</span>
-            </el-menu-item>
+          <el-menu :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
+            <template v-for="route in filteredRoutes" :key="route.path">
+              <el-menu-item
+                  v-if="!route.children || route.children.length === 0"
+                  :index="route.path"
+                  @click="saveActiveNav(route.path)"
+              >
+                <el-icon><component :is="route.meta.icon" /></el-icon>
+                <span>{{ route.meta.title }}</span>
+              </el-menu-item>
+              <el-sub-menu v-else :index="route.path">
+                <template #title>
+                  <el-icon><component :is="route.meta.icon" /></el-icon>
+                  <span>{{ route.meta.title }}</span>
+                </template>
+                <template v-for="child in route.children" :key="child.path">
+                  <el-menu-item :index="child.path" @click="saveActiveNav(child.path)">
+                    <el-icon><component :is="child.meta.icon" /></el-icon>
+                    <span>{{ child.meta.title }}</span>
+                  </el-menu-item>
+                </template>
+              </el-sub-menu>
+            </template>
           </el-menu>
         </el-aside>
         <el-container>
@@ -48,21 +49,30 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, computed } from 'vue';
 import Header from './components/Header.vue';
-// 挂载 DOM 之前
-onBeforeMount(() => {
-  activePath.value = sessionStorage.getItem("activePath")
-    ? sessionStorage.getItem("activePath")
-    : "/index"
-})
+import { useRouter } from 'vue-router';
 let isCollapse = ref(false);
 let activePath = ref("");
+
+const router = useRouter();
+const routes = router.options.routes;
+
+// 过滤动态路由
+const filteredRoutes = computed(() => {
+  return routes.filter(route => route.children && route.children.length > 0);
+});
+
 // 保存链接的激活状态
 const saveActiveNav = (path) => {
   sessionStorage.setItem("activePath", path);
   activePath.value = path;
 }
+
+// 获取存储的路径状态
+onBeforeMount(() => {
+  activePath.value = sessionStorage.getItem("activePath") || "/dashboard";
+});
 </script>
 
 <style scoped>
@@ -75,27 +85,9 @@ const saveActiveNav = (path) => {
   background: #f2f3f5;
 }
 
-.el-header {
-  height: 48px;
-  overflow: hidden;
-  width: 100%;
-  background-color: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-
-.system-name {
-  color: #fff;
-  font-size: 18px;
-}
-
 .el-aside {
   background: white;
   width: auto !important;
-}
-
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
 }
 
 .el-footer {
@@ -106,22 +98,6 @@ const saveActiveNav = (path) => {
 
 .el-footer:hover {
   color: #2661ef;
-}
-
-.toggle-button {
-  background-color: #d9e0e7;
-  font-size: 18px;
-  line-height: 24px;
-  color: #fff;
-  text-align: center;
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  color: black;
-}
-
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
 }
 
 .el-menu-item.is-active {

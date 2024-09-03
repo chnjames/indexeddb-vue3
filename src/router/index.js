@@ -4,6 +4,7 @@ import { getToken, removeToken } from "@/utils/cookies";
 import LoginView from "@/views/LoginView.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import UserManagementView from "@/views/UserManagementView.vue";
+import CustomerManager from "@/views/CustomerManager.vue";
 import Layouts from "@/layouts/index.vue";
 
 // 设置白名单
@@ -61,7 +62,27 @@ const router = createRouter({
           },
         },
       ],
-    },
+    }, {
+      path: "/customer-management",
+      component: Layouts,
+      redirect: "/customer-info",
+      meta: {
+        title: "客户管理",
+      },
+      children: [
+        {
+          path: "/customer-info",
+          component: CustomerManager, // 使用客户管理页面组件
+          name: "customer-info",
+          meta: {
+            title: "客户信息",
+            icon: "user", // 根据需要替换为合适的图标
+            affix: true,
+            keepAlive: true,
+          },
+        },
+      ],
+    }
   ],
 });
 

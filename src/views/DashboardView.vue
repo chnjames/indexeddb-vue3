@@ -30,11 +30,11 @@
   const newForm = ref({ title: '', description: '' });
   
   const loadForms = async () => {
-    forms.value = await db.getForms();
+    forms.value = await db.getCustomerByName();
   };
   
   const addForm = async () => {
-    await db.addForm(newForm.value);
+    await db.getCustomerByName(newForm.value);
     showAddFormDialog.value = false;
     await loadForms();
     newForm.value = { title: '', description: '' };

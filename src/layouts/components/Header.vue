@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :span="4">后台管理系统</el-col>
+    <el-col :span="4">深圳市广力精密五金订单管理系统</el-col>
     <el-col :offset="12" :span="8">
       <el-dropdown>
         <span>Admin
