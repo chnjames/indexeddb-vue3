@@ -1,43 +1,9 @@
 <template>
   <div>
     <el-container class="app-container">
-      <el-header>
-        <Header />
-      </el-header>
-
+      <el-header><Header /></el-header>
       <el-container style="overflow: auto">
-        <el-aside>
-          <div class="toggle-button" @click="isCollapse = !isCollapse">
-            <el-icon :size="20">
-              <Expand v-if="isCollapse" />
-              <Fold v-if="!isCollapse" />
-            </el-icon>
-          </div>
-          <el-menu :default-active="activePath" class="el-menu-vertical-demo" :collapse="isCollapse">
-            <template v-for="route in filteredRoutes" :key="route.path">
-              <el-menu-item
-                  v-if="!route.children || route.children.length === 0"
-                  :index="route.path"
-                  @click="saveActiveNav(route.path)"
-              >
-                <el-icon><component :is="route.meta.icon" /></el-icon>
-                <span>{{ route.meta.title }}</span>
-              </el-menu-item>
-              <el-sub-menu v-else :index="route.path">
-                <template #title>
-                  <el-icon><component :is="route.meta.icon" /></el-icon>
-                  <span>{{ route.meta.title }}</span>
-                </template>
-                <template v-for="child in route.children" :key="child.path">
-                  <el-menu-item :index="child.path" @click="saveActiveNav(child.path)">
-                    <el-icon><component :is="child.meta.icon" /></el-icon>
-                    <span>{{ child.meta.title }}</span>
-                  </el-menu-item>
-                </template>
-              </el-sub-menu>
-            </template>
-          </el-menu>
-        </el-aside>
+        <el-aside><Aside /></el-aside>
         <el-container>
           <el-main>
             <router-view></router-view>
@@ -49,30 +15,8 @@
   </div>
 </template>
 <script setup>
-import { onBeforeMount, ref, computed } from 'vue';
-import Header from './components/Header.vue';
-import { useRouter } from 'vue-router';
-let isCollapse = ref(false);
-let activePath = ref("");
-
-const router = useRouter();
-const routes = router.options.routes;
-
-// 过滤动态路由
-const filteredRoutes = computed(() => {
-  return routes.filter(route => route.children && route.children.length > 0);
-});
-
-// 保存链接的激活状态
-const saveActiveNav = (path) => {
-  sessionStorage.setItem("activePath", path);
-  activePath.value = path;
-}
-
-// 获取存储的路径状态
-onBeforeMount(() => {
-  activePath.value = sessionStorage.getItem("activePath") || "/dashboard";
-});
+import Header from "./components/Header.vue";
+import Aside from "./components/Aside.vue";
 </script>
 
 <style scoped>

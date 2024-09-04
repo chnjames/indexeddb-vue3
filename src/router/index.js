@@ -27,6 +27,7 @@ const router = createRouter({
       redirect: "/dashboard",
       meta: {
         title: "仪表盘",
+        icon: "DataBoard",
       },
       children: [
         {
@@ -35,7 +36,7 @@ const router = createRouter({
           name: "dashboard",
           meta: {
             title: "工作台",
-            icon: "dashboard",
+            icon: "DataBoard",
             affix: true,
             keepAlive: true,
           },
@@ -48,6 +49,7 @@ const router = createRouter({
       redirect: "/user-info",
       meta: {
         title: "用户管理",
+        icon: "User",
       },
       children: [
         {
@@ -56,7 +58,7 @@ const router = createRouter({
           name: "user-info",
           meta: {
             title: "用户信息",
-            icon: "user",
+            icon: "User",
             affix: true,
             keepAlive: true,
           },
@@ -68,6 +70,7 @@ const router = createRouter({
       redirect: "/customer-info",
       meta: {
         title: "客户管理",
+        icon: "User",
       },
       children: [
         {
@@ -76,7 +79,7 @@ const router = createRouter({
           name: "customer-info",
           meta: {
             title: "客户信息",
-            icon: "user", // 根据需要替换为合适的图标
+            icon: "User", // 根据需要替换为合适的图标
             affix: true,
             keepAlive: true,
           },
