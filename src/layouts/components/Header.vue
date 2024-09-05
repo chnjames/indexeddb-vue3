@@ -1,7 +1,8 @@
 <template>
-  <el-row>
-    <el-col :span="4">深圳市广力精密五金订单管理系统</el-col>
-    <el-col :offset="12" :span="8">
+  <div class="container">
+  <!--<h3>深圳市广力精密五金订单管理系统</h3>-->
+    <h3>xx</h3>
+    <div class="container-right">
       <el-dropdown>
         <span>Admin
           <el-icon class="el-icon--right">
@@ -10,15 +11,13 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click.native="onLogout"
-            >退出系统
-            </el-dropdown-item>
+            <el-dropdown-item @click.native="onLogout">退出系统</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <el-avatar shape="circle" :src="avatar" :size="40"></el-avatar>
-    </el-col>
-  </el-row>
+      <el-avatar shape="circle" :src="avatar" :size="36"></el-avatar>
+    </div>
+  </div>
 </template>
 <script setup>
 import {ArrowDown} from "@element-plus/icons-vue";
@@ -46,3 +45,22 @@ const onLogout = () => {
   });
 };
 </script>
+<style scoped>
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.container-right {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.el-avatar {
+  margin-left: 20px;
+}
+.el-dropdown {
+  color: #fff;
+}
+</style>

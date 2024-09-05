@@ -8,7 +8,7 @@
           <el-main>
             <router-view></router-view>
           </el-main>
-          <el-footer>Copyright © 2022 后台管理系统</el-footer>
+          <el-footer>Copyright © 2024 深圳市广力精密五金订单管理系统</el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -21,17 +21,17 @@ import Aside from "./components/Aside.vue";
 
 <style scoped>
 .app-container {
-  position: absolute;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  background: #f2f3f5;
+  height: 100vh;
 }
-
+.el-header {
+  background-color: #409eff;
+  color: white;
+  height: 60px;
+}
 .el-aside {
   background: white;
-  width: auto !important;
+  width: 150px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .el-footer {
