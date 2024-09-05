@@ -90,7 +90,9 @@ const isEdit = ref(false); // 判断是否为编辑模式
 
 // 获取订单数据
 onMounted(async () => {
-  const customerId = route.params.id; // 从路由参数获取客户ID
+  const customerId = route.params.id;
+  const customer = await db.getCustomerById(customerId);
+  console.log('customer:', customer);
   const orders = await db.getOrdersByCustomerId(customerId); // 通过 customerId 获取订单数据
   if (orders.length > 0) {
     const [firstOrder] = orders;

@@ -30,8 +30,8 @@ export async function initDB() {
     // 检查用户表是否已有用户
     const existingUsers = await db.getAll('users');
     if (existingUsers.length === 0) {
-        await db.add('users', {nickname: '管理员', username: 'admin', password: 'admin123', phone: '17683928893', status: 1, createTime: new Date().getTime()});
-        await db.add('users', {nickname: '游客', username: 'guest', password: 'guest123', phone: '17683928893', status: 1, createTime: new Date().getTime()});
+        await db.add('users', {nickname: '管理员', username: 'admin', password: 'admin123', phone: '17683928893', status: 1, remark: '管理员账号', createTime: new Date().getTime()});
+        await db.add('users', {nickname: '游客', username: 'guest', password: 'guest123', phone: '17683928893', status: 1, remark: '游客账号', createTime: new Date().getTime()});
     }
 }
 
@@ -75,6 +75,11 @@ export const db = {
     async deleteCustomer(id) {
         const db = await dbPromise;
         await db.delete('customers', id);
+    },
+    // 根据 id 获取客户
+    async getCustomerById(id) {
+        const db = await dbPromise;
+        return await db.get('customers', id);
     },
     // 添加用户
     async addUser(user) {
