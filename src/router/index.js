@@ -5,6 +5,7 @@ import DashboardView from "@/views/DashboardView.vue";
 import UserManagementView from "@/views/UserManagementView.vue";
 import CustomerManager from "@/views/CustomerManager.vue";
 import PurchaseOrder from "@/views/PurchaseOrder.vue";
+import DeliveryRecords from "@/views/DeliveryRecords.vue";
 import Layouts from "@/layouts/index.vue";
 
 // 设置白名单
@@ -86,6 +87,16 @@ const routes = [
         hidden: true,
         meta: {
           title: "采购订单",
+          icon: "Management",
+          affix: true,
+          keepAlive: true
+        }
+      }, {
+        path: "/delivery-records",
+        component: DeliveryRecords,
+        name: "delivery-records",
+        meta: {
+          title: "交货记录",
           icon: "Management",
           affix: true,
           keepAlive: true

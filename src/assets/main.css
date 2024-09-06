@@ -29,3 +29,13 @@ a,
     place-items: center;
   }
 }
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}

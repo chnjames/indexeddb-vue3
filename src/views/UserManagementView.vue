@@ -1,10 +1,10 @@
 <template>
-  <div class="container" style="margin-bottom: 20px;">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" :label-width="formLabelWidth">
-      <el-form-item label="用户名称" prop="mobile">
+  <div class="container">
+    <el-form :model="queryParams" ref="queryRef" :inline="true" label-width="80px">
+      <el-form-item label="用户名称">
         <el-input v-model="queryParams.username" placeholder="请输入用户名称" clearable @keyup.enter="handleQuery"/>
       </el-form-item>
-      <el-form-item label="状态" prop="nickName">
+      <el-form-item label="状态">
         <el-select v-model="queryParams.status" placeholder="请选择状态" style="width: 200px">
           <el-option label="启用" :value="1"/>
           <el-option label="停用" :value="0"/>
@@ -60,7 +60,7 @@
 
   <!-- 客户对话框 -->
   <el-dialog :title="dialogTitle" v-model="dialogVisible" width="500">
-    <el-form ref="formRef" :model="form" :rules="rules" :label-width="formLabelWidth">
+    <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="用户昵称" prop="nickname">
         <el-input v-model="form.nickname" placeholder="请输入用户昵称"/>
       </el-form-item>
@@ -90,11 +90,11 @@
 </template>
 
 <script setup>
-import {Delete, Edit, Search, Share, Upload, Refresh, Plus} from '@element-plus/icons-vue'
+import {Search, Refresh, Plus} from '@element-plus/icons-vue'
 import {ref, onMounted, toRaw, computed} from 'vue';
 import {parseTime} from '@/utils';
 import {ElMessage} from 'element-plus';
-import {db} from '@/api/indexedDB'; // Correctly referencing db
+import {db} from '@/api/indexedDB';
 import {useRouter} from 'vue-router';
 
 const router = useRouter();
@@ -105,7 +105,7 @@ const filteredCustomers = ref([]); // 保存过滤后的客户列表
 const dialogVisible = ref(false);  // Dialog visibility control
 const dialogTitle = ref('');
 const form = ref({
-  id: 0,
+  id: '',
   nickname: '',
   username: '',
   password: '',
@@ -114,7 +114,6 @@ const form = ref({
   createdTime: '',
   remark: ''
 });
-const formLabelWidth = '80px';
 const formRef = ref(null);
 
 const pageInfo = ref({
@@ -208,9 +207,6 @@ const saveCustomer = async () => {
       dialogVisible.value = false;
       filteredCustomers.value = customers.value;
       ElMessage.success('保存成功');
-    } else {
-      ElMessage.error('表单验证失败，请检查输入内容');
-      return false;
     }
   });
 };
@@ -248,13 +244,5 @@ const openPurchase = (customer) => {
 </script>
 
 <style scoped>
-.pagination-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
 
-.mb20 {
-  margin-bottom: 20px;
-}
 </style>

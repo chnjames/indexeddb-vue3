@@ -55,12 +55,12 @@ const onLogout = () => {
 .container-right {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: #000000;
 }
 .el-avatar {
   margin-left: 20px;
 }
 .el-dropdown {
-  color: #fff;
+  color: #000000;
 }
 </style>

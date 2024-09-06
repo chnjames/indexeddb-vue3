@@ -22,16 +22,19 @@ import Aside from "./components/Aside.vue";
 <style scoped>
 .app-container {
   height: 100vh;
+  background-color: #f0f2f5;
 }
+
 .el-header {
-  background-color: #409eff;
-  color: white;
+  background-color: #FFFFFF;
+  color: #000000;
   height: 60px;
+  box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;
 }
 .el-aside {
   background: white;
   width: 150px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #ebeef5;
 }
 
 .el-footer {
@@ -53,6 +56,6 @@ import Aside from "./components/Aside.vue";
   height: 50px;
   line-height: 50px;
   box-sizing: border-box;
-  margin: 2px 5px 0px 2px;
+  margin: 2px 5px 0 2px;
 }
 </style>

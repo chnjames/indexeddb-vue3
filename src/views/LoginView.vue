@@ -26,8 +26,8 @@ const router = useRouter();
 const onLogin = async () => {
   const user = await db.getUserByUsername(username.value);
   if (user && user.password === password.value) {
-    userStore.login({ username: user.username, password: user.password });
-    router.push('/dashboard');
+    userStore.login({ userName: user.username, password: user.password });
+    router.push('/');
   } else {
     console.log('登录失败');
   }

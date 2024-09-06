@@ -30,6 +30,7 @@ export const useUserStore = defineStore("user", {
       return new Promise((resolve) => {
         removeToken(); // 清除存储的 token
         this.user = null; // 清除用户信息
+        sessionStorage.clear(); // 清除会话存储
         resolve();
       });
     },
